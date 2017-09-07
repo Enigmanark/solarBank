@@ -13,8 +13,14 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    UserLookupService userLookupService = new UserLookupService();
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        //Assign the UserLookupService to httpSecurity
+        http.userDetailsService(userLookupService);
+
+        //Configure security
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/user/new").permitAll()
@@ -32,9 +38,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
+        //Remove this hardcoded user later
         auth.inMemoryAuthentication()
                 .withUser("admin").password("johnathan9!")
                 .authorities(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        
+        //Assign the UserLookupService to authenication
+        auth.userDetailsService(userLookupService);
     }
 }

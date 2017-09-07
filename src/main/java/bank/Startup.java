@@ -13,22 +13,9 @@ import java.util.List;
 @Component
 public class Startup implements ApplicationListener<ApplicationReadyEvent> {
 
-    @Autowired
-    private UserRepo userRepo;
-
     @Override
     public void onApplicationEvent(final ApplicationReadyEvent e) {
-        loadUsersIntoSecurity();
+
     }
 
-    private void loadUsersIntoSecurity() {
-        List<User> users = userRepo.findAll();
-        for(User user : users) {
-            System.out.println("Loading " + user);
-            Authentication auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(auth);
-            System.out.println("Done.");
-        }
-        System.out.println("Accounts loaded into memory.");
-    }
 }
