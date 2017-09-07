@@ -1,4 +1,4 @@
-package blog;
+package bank;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

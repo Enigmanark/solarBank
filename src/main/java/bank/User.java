@@ -1,4 +1,4 @@
-package blog;
+package bank;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,6 +17,11 @@ public class User implements UserDetails {
     private boolean locked = false;
     private boolean credentials;
     private boolean expired;
+
+    @Override
+    public String toString() {
+        return username + ", " + firstName + ", " + lastName;
+    }
 
     public User() {
         authorities = new ArrayList<GrantedAuthority>();

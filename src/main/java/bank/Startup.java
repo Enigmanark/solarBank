@@ -1,4 +1,4 @@
-package blog;
+package bank;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -24,9 +24,10 @@ public class Startup implements ApplicationListener<ApplicationReadyEvent> {
     private void loadUsersIntoSecurity() {
         List<User> users = userRepo.findAll();
         for(User user : users) {
+            System.out.println("Loading " + user);
             Authentication auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(auth);
-            System.out.println(user.getUsername() + " loaded.");
+            System.out.println("Done.");
         }
         System.out.println("Accounts loaded into memory.");
     }
