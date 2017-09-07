@@ -39,11 +39,9 @@ public class UserManagementController {
     public String userCreation(
             @RequestParam(value="success", required = false, defaultValue = "false") String success, Model model) {
         if(success.equals("true")) {
-            model.addAttribute("success", true);
             return "newUser";
         }
         else {
-            model.addAttribute("success", false);
             model.addAttribute("user", new User());
             return "newUser";
         }

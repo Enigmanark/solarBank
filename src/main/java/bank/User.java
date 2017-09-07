@@ -1,5 +1,6 @@
 package bank;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,6 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User implements UserDetails {
+    @Id
+    public String id;
+
+    private float balance;
     private String username;
     private String firstName;
     private String lastName;
@@ -17,6 +22,21 @@ public class User implements UserDetails {
     private boolean notLocked = true;
     private boolean notCredsExpired = true;
     private boolean notExpired = true;
+
+    public float deposit(float d) {
+        balance += d;
+        return balance;
+    }
+
+    public float withdraw(float w) {
+        balance -= w;
+        return balance;
+    }
+
+
+    public float getBalance() {
+        return balance;
+    }
 
     @Override
     public String toString() {

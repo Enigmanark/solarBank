@@ -9,9 +9,22 @@
 
 <div class="container">
     <div class="starter-template">
-        <h2 th:text="${user.getFirstName()} + ${user.getLastName()}"></h2>
+        <h2>
+            <span>Hello </span>
+            <span th:text="${user.getFirstName()}"></span>
+            <span> </span>
+            <span th:text="${user.getLastName()}"></span>
+        </h2>
     </div>
 
+    <div>
+        <span>Your account balance is $</span><span th:text="${user.getBalance()}"></span>
+        <br/>
+        <a th:href="@{/user/account/deposit}">Make a Deposit</a>
+        <br/>
+        <a th:href="@{/user/account/withdraw}">Make a Withdrawal</a>
+
+    </div>
 </div>
 
 <div th:replace="fragments/footer :: footer"/>
