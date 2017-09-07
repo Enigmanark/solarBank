@@ -14,9 +14,9 @@ public class User implements UserDetails {
     private String password;
     private List<GrantedAuthority> authorities;
     private boolean enabled = true;
-    private boolean locked = false;
-    private boolean credentials;
-    private boolean expired;
+    private boolean notLocked = true;
+    private boolean notCredsExpired = true;
+    private boolean notExpired = true;
 
     @Override
     public String toString() {
@@ -90,17 +90,17 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return expired;
+        return notExpired;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return credentials;
+        return notCredsExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return locked;
+        return notLocked;
     }
 
 }

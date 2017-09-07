@@ -13,7 +13,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    UserLookupService userLookupService = new UserLookupService();
+
+    @Autowired
+    private UserLookupService userLookupService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -31,6 +33,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated().and()
                 .formLogin().loginPage("/login").permitAll().and()
                 .formLogin().successForwardUrl("/").and()
+                .formLogin().usernameParameter("username").and()
+                .formLogin().passwordParameter("password").and()
                 .logout().permitAll()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout", HttpMethod.GET.toString()))
                 .invalidateHttpSession(true);
@@ -42,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("admin").password("johnathan9!")
                 .authorities(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        
+
         //Assign the UserLookupService to authenication
         auth.userDetailsService(userLookupService);
     }

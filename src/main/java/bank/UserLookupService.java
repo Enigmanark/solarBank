@@ -14,7 +14,6 @@ public class UserLookupService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println(userRepo);
         User user = userRepo.findByUsername(username);
         if(user == null) {
             throw new UsernameNotFoundException("Username: " + username + " not found!");

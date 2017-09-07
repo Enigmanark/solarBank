@@ -14,7 +14,8 @@
 
                     <div th:if="${param.error}">
                         <div class="alert alert-danger">
-                            Invalid username and password.
+                            Login failed. <br/>
+                            <span th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></span>
                         </div>
                     </div>
                     <div th:if="${param.logout}">
