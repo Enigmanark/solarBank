@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/header :: header"></th:block>
+
+<body>
+
+<div th:replace="fragments/headMenu :: headMenu"/>
+
+<div class="container">
+    <div class="starter-template">
+        <p>This is just a fake bank that I created where you can deposit money into a fake account that you
+        create and sign up for and then you can make transfers and more deposts and withdrawals. This app
+        was created by Johnathan Crocker as a practice exercise in web development using Spring, Thymeleaf,
+        and MongoDB</p>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

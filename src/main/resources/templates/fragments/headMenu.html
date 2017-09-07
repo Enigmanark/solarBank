@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<div th:fragment="headMenu">
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/}">Omnitek-Webdev</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a th:href="@{/}">Home</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a th:href="@{/user/account}">Account</a></li>
+                </ul>
+                <ul sec:authorize="hasRole('ROLE_ADMIN')" class="nav navbar-nav">
+                    <li class="active"><a th:href="@{/admin/users}">Users</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a th:href="@{/about}">About</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a th:href="@{/contact}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+</html>

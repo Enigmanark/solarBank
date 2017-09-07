@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/header :: header"></th:block>
+
+<body>
+
+<div th:replace="fragments/headMenu :: headMenu"/>
+
+<div class="container">
+    <div class="starter-template">
+        <h2 th:text="${user.getFirstName()} + ${user.getLastName()}"></h2>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

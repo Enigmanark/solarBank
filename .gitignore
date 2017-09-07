@@ -1,3 +1,7 @@
+.idea/
+target/
+application.properties
+
 *.class
 
 # Mobile Tools for Java (J2ME)

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="fragments/header :: header"></th:block>
+
+<body>
+    <th:block th:include="fragments/headMenu :: headMenu"></th:block>
+
+    <div id="content">
+        <div th:if="${success}">
+            <div class="alert alert-info">
+                You have successfully registered.
+            </div>
+        </div>
+        <div th:unless="${success == true}">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                <h1>New User</h1>
+                <form action="#" th:action="@{/user/new}" th:object="${user}" method="post">
+                   <fieldset>
+                       <span>First Name:</span><input type="text" th:field="*{firstName}"/>
+                       <br/>
+                       <span>Last Name:</span><input type="text" th:field="*{lastName}"/>
+                       <br/>
+                       <span>Username:</span><input type="text" th:field="*{username}"/>
+                       <br/>
+                       <span>Password:</span><input type="text" th:field="*{password}"/>
+                       <input type="submit" value="Submit"/>
+                   </fieldset>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+
+</body>
+
+</html>
