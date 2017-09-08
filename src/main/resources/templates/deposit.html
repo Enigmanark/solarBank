@@ -14,12 +14,17 @@
         </div>
         <span>Click <a th:href="@{/user/account}">here</a> to return to account summary.</span>
     </div>
+    <div th:if="${param.error}">
+        <div class="alert alert-danger">
+            You cannot make a deposit of 0.
+        </div>
+    </div>
     <div th:unless="${param.success}">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
             <h1>New User</h1>
             <form action="#" th:action="@{/user/account/deposit}" th:object="${deposit}" method="post">
                 <fieldset>
-                    <span>Deposit Amount:</span><input type="text" th:field="*{depositAmount}"/>
+                    <span>Deposit Amount:</span><input type="number" th:field="*{depositAmount}"/>
                     <br/>
                     <input type="submit" value="Submit"/>
                 </fieldset>

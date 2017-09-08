@@ -18,8 +18,6 @@ public class UserLookupService implements UserDetailsService {
         if(user == null) {
             throw new UsernameNotFoundException("Username: " + username + " not found!");
         }
-        System.out.println("-------------FOUND---------------");
-        System.out.println("Retrieving " + username);
         return user;
     }
 }

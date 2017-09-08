@@ -1,13 +1,13 @@
 package bank;
 
 public class DAOWithdraw {
-    private float withdrawAmount;
+    private float amount;
 
-    public void setWidthrawAmount(float amount) {
-        withdrawAmount = amount;
+    public void setAmount(float amount) {
+        this.amount = amount;
     }
 
-    public float getWithdrawAmount() {
-        return withdrawAmount;
+    public float getAmount() {
+        return amount;
     }
 }

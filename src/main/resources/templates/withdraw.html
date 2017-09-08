@@ -14,12 +14,23 @@
         </div>
         <span>Click <a th:href="@{/user/account}">here</a> to return to account summary.</span>
     </div>
+    <div th:if="${param.error}">
+        <div th:if="${param.error[0]} == '1'" class="alert alert-danger">
+            You cannot make a withdrawal of 0.
+        </div>
+        <div th:if="${param.error[0]} == '2'" class="alert alert-danger">
+            You don't have enough in your account to make that withdrawal.
+        </div>
+        <div th:if="${param.error[0]} == '3'" class="alert alert-danger">
+            Critical error. Contact administrator about this error.
+        </div>
+    </div>
     <div th:unless="${param.success}">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
             <h1>New User</h1>
             <form action="#" th:action="@{/user/account/withdraw}" th:object="${withdraw}" method="post">
                 <fieldset>
-                    <span>Withdraw Amount:</span><input type="text" th:field="*{withdrawAmount}"/>
+                    <span>Withdraw Amount:</span><input type="number" th:field="*{amount}"/>
                     <br/>
                     <input type="submit" value="Submit"/>
                 </fieldset>

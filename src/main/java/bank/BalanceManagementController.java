@@ -14,8 +14,9 @@ public class BalanceManagementController {
     @GetMapping("/user/account/withdraw")
     public String withdraw(
             @RequestParam(value = "success", required = false, defaultValue = "false") String success,
+            @RequestParam(value = "error", required = false, defaultValue = "0") String error,
             Model model) {
-        if(success.equals("true")) {
+        if(success.equals("success")) {
             return "withdraw";
         }
         else {
@@ -25,18 +26,27 @@ public class BalanceManagementController {
     }
 
     @PostMapping("/user/account/withdraw")
-    public String deposit(@ModelAttribute DAOWithdraw withdraw, Model model) {
+    public String withdraw(@ModelAttribute DAOWithdraw withdraw, Model model) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepo.findByUsername(username);
-        user.withdraw(withdraw.getWithdrawAmount());
-        userRepo.save(user);
-        return "redirect:/user/account/withdraw?success=true";
+        if(withdraw.getAmount() == 0) {
+            return "redirect:/user/account/withdraw?error=1";
+        }
+        float result = user.withdraw(withdraw.getAmount());
+        if(result == -1) {
+            return "redirect:/user/account/withdraw?error=2";
+        }
+        else {
+            userRepo.save(user);
+            return "redirect:/user/account/withdraw?success=true";
+        }
     }
 
 
     @GetMapping("/user/account/deposit")
     public String deposit(
             @RequestParam(value = "success", required = false, defaultValue = "false") String success,
+            @RequestParam(value = "error", required = false, defaultValue = "0") String error,
             Model model) {
         if(success.equals(true)) {
             return "deposit";
@@ -50,11 +60,17 @@ public class BalanceManagementController {
 
     @PostMapping("/user/account/deposit")
     public String deposit(@ModelAttribute DAODeposit deposit, Model model) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userRepo.findByUsername(username);
-        user.deposit(deposit.getDepositAmount());
-        userRepo.save(user);
-        return "redirect:/user/account/deposit?success=true";
+        float amount = deposit.getDepositAmount();
+        if(amount == 0) {
+            return "redirect:/user/account/deposit?error=1";
+        }
+        else {
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            User user = userRepo.findByUsername(username);
+            user.deposit(deposit.getDepositAmount());
+            userRepo.save(user);
+            return "redirect:/user/account/deposit?success=true";
+        }
     }
 
 }

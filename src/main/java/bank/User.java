@@ -29,8 +29,14 @@ public class User implements UserDetails {
     }
 
     public float withdraw(float w) {
-        balance -= w;
-        return balance;
+        float difference = balance - w;
+        if( difference >= 0 ) {
+            balance = difference;
+            return balance;
+        } else {
+            return -1;
+        }
+
     }
 
 
